@@ -24,7 +24,7 @@ TodoManager.Views.Todos = Backbone.View.extend({
       _.each(that.collection.models, function(item) {
           todoView = new TodoManager.Views.Todo ({ model: item });
           that.$el.append(todoView.render().el);
-          console.log("Item ID = " + item.get("id"))
+          console.log("Item ID = " + item.get("id"));
       });
       console.log("Collection size = " + that.collection.size());
 
