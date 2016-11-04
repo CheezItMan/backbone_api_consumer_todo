@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Todo Manager</title>
+    <link href="lib/foundation/css/foundation.css" rel="stylesheet">
+    <link href="app/css/main.css" rel="stylesheet">
+  </head>
+  <body>
+    <header class="bs-header">
+      <div class="container">
+        <h1>Dynamic Todo List</h1>
+        <p>Backbonejs Todo Application</p>
+      </div>
+    </header>
+    <div class="container">
+      <div class="r">
+        <div class="col-xs-12 main-container">
+        </div>
+      </div>
+    </div>
+
+    <script type="text/template" id="tpl-todos">
+      <h2 class="page-header text-center">List of Todo Items</h2>
+      <p class="text-center">
+        <a href="#todos/new" class="btn btn-lg btn-outline">Add Todo Item</a>
+      </p>
+      <ul class="media-list media-list row small-up-1 medium-up-2 large-up-4 todos-container "></ul>
+    </script>
+
+    <script type="text/template" id="tpl-todo">
+      <div class="media-heading">
+        <h3>
+          <%- name %>
+          <small>
+            <a href="#todos/edit/<%- id %>"><span class="glyphicon glyphicon-pencil"><img src="images/edit-file.png" width="25px" ></span></a>
+            <a href="#todos/delete/<%- id %>" class="delete-contract">
+              <span class="glyphicon glyphicon-trash"><img src="images/waste-bin.png" width="25px" ></span>
+            </a>
+          </small>
+        </h3>
+      </div>
+      <div class="media-body">
+        <dl>
+          <dt>Description:</dt>
+          <dd><%- description %></dd>
+          <dt>Completed?:</dt>
+          <dd><%- completed %></dd>
+        </dl>
+      </div>
+      <hr>
+    </script>
+
+    <script type="text/template" id="tpl-new-todo">
+      <h2 class="page-header text-center"><%= isNew ? 'Create' : 'Edit' %> Todo Item</h2>
+      <form role="form" class="form-horizontal contract-form">
+        <div class="form-group">
+          <label class="col-sm-4 control-label">Full name:</label>
+          <div class="col-sm-6">
+            <input type="text" class="form-control todo-name-input" value="<%- name %>">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-4 control-label">Description:</label>
+          <div class="col-sm-6">
+            <textarea class="form-control contact-email-input"><%- description %> </textarea>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-sm-4 control-label">Completed?:</label>
+          <div class="col-sm-6">
+            <input type="checkbox" id="completed" <% print( completed ?  'checked="checked"' : '') %> />
+           <span class="text"><%- completed %></span>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-offset-4 col-sm-3">
+            <button type="submit" class="btn btn-outline btn-lg btn-block">Submit</button>
+          </div>
+          <div class="col-sm-3">
+            <a href="#todos" class="btn btn-outline btn-lg btn-block">Cancel</a>
+          </div>
+        </div>
+      </form>
+    </script>
+    <!-- Library Code -->
+    <script src="lib/jquery/jquery-3.1.1.js"></script>
+    <script src="lib/underscore/underscore.js"></script>
+    <script src="lib/backbone/backbone.js"></script>
+
+    <!-- Application Backbone Code -->
+    <script src="app/js/app.js"></script>
+
+    <script src="app/js/models/todo.js"></script>
+    <script src="app/js/collections/todos.js"></script>
+    <script src="app/js/views/todo.js"></script>
+    <script src="app/js/views/todos.js"></script>
+    <script src="app/js/views/todoForm.js"></script>
+    <script src="app/js/router/router.js"></script>
+
+  </body>
+</html>
