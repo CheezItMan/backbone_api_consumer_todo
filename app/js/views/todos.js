@@ -2,6 +2,7 @@ TodoManager.Views.Todos = Backbone.View.extend({
   template: _.template($('#tpl-todos').html()),
   initialize: function() {
     //this.collection = new TodoManager.Collections.Todos();
+    //this.collection.on('change reset add remove', this.listening, this);
   },
 
   renderOne: function(todo) {
@@ -10,7 +11,6 @@ TodoManager.Views.Todos = Backbone.View.extend({
   },
 
   render: function() {
-    console.log("Rendering Collection");
 
     var html = this.template();
     var that = this;
@@ -24,13 +24,14 @@ TodoManager.Views.Todos = Backbone.View.extend({
       _.each(that.collection.models, function(item) {
           todoView = new TodoManager.Views.Todo ({ model: item });
           that.$el.append(todoView.render().el);
-          console.log("Item ID = " + item.get("id"));
       });
-      console.log("Collection size = " + that.collection.size());
-
     });
 
-    console.log("Finished Rendering");
     return this;
+  },
+
+  listening: function(e) {
+    console.log(e);
+    this.render();
   }
 });

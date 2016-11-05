@@ -44,14 +44,6 @@ window.TodoManager = {
       var todo = todos.get(id),
       editTodoForm;
 
-      todos.each(function(model) {
-        console.log("Model #:" + model.get("id"));
-      });
-
-      console.log("Collection size = " + todos.size());
-
-      console.log("Got todo: " + todo);
-      console.log("ID: " + id);
 
       if (todo) {
         editTodoForm = new TodoManager.Views.TodoForm({
@@ -60,8 +52,11 @@ window.TodoManager = {
 
         editTodoForm.on('form:submitted', function(attrs) {
           todo.set(attrs);
-          console.log("Todo's ID = " + todo.id);
-          var result = todo.save();
+          var result = todo.save(attrs, {success: function(task) {
+
+          }});
+
+
 
           router.navigate('todos', true);
         });
