@@ -1,8 +1,8 @@
 TodoManager.Views.TodoForm = Backbone.View.extend({
-template: _.template($('#tpl-new-todo').html()),
-events: {
-  'submit .contract-form': 'onFormSubmit'
-},
+  template: _.template($('#tpl-new-todo').html()),
+  events: {
+    'submit .contract-form': 'onFormSubmit'
+  },
 
 /* ... */
 
@@ -11,8 +11,8 @@ onFormSubmit: function(e) {
 
   this.trigger('form:submitted', {
     name: this.$('.todo-name-input').val(),
-    description: this.$('.todo-tel-input').val(),
-    completed: this.$('.todo-email-input').val()
+    description: this.$('.todo-description').val(),
+    completed: this.$('.todo-completed').val()
   });
 },
 

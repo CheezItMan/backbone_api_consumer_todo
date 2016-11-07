@@ -25,14 +25,18 @@ window.TodoManager = {
 
     router.on('route:newTodo', function() {
       var newTodoForm = new TodoManager.Views.TodoForm({
-        model: new TodoManager.Models.Todo()
+        model: new TodoManager.Models.Todo({name: "", description: "", completed: false})
       });
 
       newTodoForm.on('form:submitted', function(attrs) {
-        attrs.id = todos.isEmpty() ? 1 : (_.max(todos.pluck('id')) + 1);
-        todos.add(attrs);
-        var myTodo = todos.get(attrs.id);
-        myTodo.save(attrs, {post: true});
+        //attrs.id = todos.isEmpty() ? 1 : (_.max(todos.pluck('id')) + 1);
+        console.log(attrs);
+        var myTodo = new TodoManager.Models.Todo(attrs);
+        console.log("Todo Saved");
+        myTodo.save(attrs, {post: true, wait: true});
+
+        todos.add(myTodo);
+        console.log (todos);
         router.navigate('todos', true);
       });
 
@@ -52,9 +56,11 @@ window.TodoManager = {
 
         editTodoForm.on('form:submitted', function(attrs) {
           todo.set(attrs);
+          console.log("button clicked");
           var result = todo.save(attrs, {success: function(task) {
-
-          }});
+            //todos.fetch();
+            console.log("Fetched");
+          }, put: true, wait: true });
 
 
 
